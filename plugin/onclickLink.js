@@ -10,7 +10,7 @@ for (var i = 0; i < hrefs.length; i++) {
 
 
 function getData(url) {
-    var xhf = new XMLHttpRequest();
+    var xhr = new XMLHttpRequest();
     xhr.open("GET", url, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
