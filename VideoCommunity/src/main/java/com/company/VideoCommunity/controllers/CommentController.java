@@ -12,6 +12,7 @@ import com.company.VideoCommunity.models.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 public class CommentController {
@@ -36,7 +37,14 @@ public class CommentController {
         for (int i = 0; i < comments.size(); i++) {
             map.put(i, comments.get(i));
         }
-        return new ResponseEntity<>(map, HttpStatus.OK);
+        HashMap<String, Object> res = new HashMap<>();
+        List<String> commentText = new ArrayList<>(comments.size());
+        for(Comment c: comments){
+            commentText.add(c.text);
+        }
+        res.put("comments",commentText);
+
+        return new ResponseEntity<>(comments, HttpStatus.OK);
     }
 
 }
