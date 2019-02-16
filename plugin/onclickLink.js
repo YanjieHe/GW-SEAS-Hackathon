@@ -16,7 +16,6 @@ function getData(url) {
         if (xhr.readyState === 4) {
             y = 100;
             x = 100;
-
             var extensionOrigin = 'chrome-extension://' + chrome.runtime.id;
             if (!location.ancestorOrigins.contains(extensionOrigin)) {
                 if (document.getElementById("wrapper") != null) {

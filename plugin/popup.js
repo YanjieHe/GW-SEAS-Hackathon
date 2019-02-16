@@ -13,7 +13,7 @@ document.getElementById("video_submit").onclick = function () {
 
 function sendData(value, onSuccess) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://", true);
+    xhr.open("POST", "http://localhost:8080/savetab", true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             onSuccess(xhr);
