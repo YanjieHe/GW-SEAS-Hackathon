@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import com.company.VideoCommunity.mappers.CommentMapper;
 import com.company.VideoCommunity.models.*;
 
@@ -19,7 +19,7 @@ public class CommentController {
     private CommentMapper commentMapper;
 
     @RequestMapping(value = "/comments", method = RequestMethod.GET)
-    public ResponseEntity<Object> recommendComments(@RequestBody int commentId, @RequestBody int videoId) {
+    public ResponseEntity<Object> recommendComments(@RequestParam int commentId, @RequestParam int videoId) {
         ArrayList<Comment> comments = commentMapper.findByVideoId(videoId);
         int index = -1;
         for (int i = 0; i < comments.size(); i++) {

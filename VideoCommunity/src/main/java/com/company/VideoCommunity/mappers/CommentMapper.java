@@ -12,10 +12,10 @@ import java.util.ArrayList;
 @Mapper
 public interface CommentMapper {
     @Results({
-            @Result(property = "id", column = "commendId"),
+            @Result(property = "id", column = "commentId"),
             @Result(property = "text", column = "commentText"),
             @Result(property = "score", column = "score")
     })
-    @Select("SELECT commendId, commentText, score FROM Comments where videoId = #{videoId}")
+    @Select("SELECT commentId, commentText, score FROM Comments where videoId = #{videoId}")
     ArrayList<Comment> findByVideoId(@Param("videoId") int videoId);
 }
