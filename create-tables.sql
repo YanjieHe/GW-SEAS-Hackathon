@@ -1,6 +1,6 @@
 CREATE TABLE Videos(
     videoId INT,
-    videoLink INT
+    videoLink TEXT
 );
 
 CREATE TABLE Comments(
