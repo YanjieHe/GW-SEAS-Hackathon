@@ -10,7 +10,7 @@ for (var i = 0; i < hrefs.length; i++) {
 
 
 function getData(url) {
-    var xhf = new XMLHttpRequest();
+    var xhr = new XMLHttpRequest();
     xhr.open("GET", url, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -50,7 +50,7 @@ function getData(url) {
                     var commentList = document.createElement("ul");
                     for (var i = 0; i < data.comments.length; i++) {
                         var li = document.createElement("li");
-                        li.innerText = data.comments[i];
+                        li.innerText = "Score: " + data.comments[i].score + " Text:" + data.comments[i].text;
                         commentList.append(li);
                     }
                     wrapper.append(commentList);
