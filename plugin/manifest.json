@@ -1,0 +1,43 @@
+{
+  "name": "Coplayers",
+  "version": "1.0",
+  "description": "Allow you to share and coplay with your friends",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "onclickLink.js",
+        "bootstrap.bundle.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "bootstrap.min.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "*://stackoverflow.com/*"
+  ],
+  "web_accessible_resources": [
+    "frame.html",
+    "frame.js"
+  ],
+  "manifest_version": 2,
+  "browser_action": {
+    "default_popup": "popup.html"
+  }
+}
