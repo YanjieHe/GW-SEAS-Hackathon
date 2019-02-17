@@ -1,9 +1,6 @@
 package com.company.VideoCommunity.controllers;
 
-import com.company.VideoCommunity.models.User;
-import com.company.VideoCommunity.models.Video;
-import com.company.VideoCommunity.models.VideoComment;
-import com.company.VideoCommunity.models.VideoTab;
+import com.company.VideoCommunity.models.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +22,11 @@ public class RecomendationContainer {
     List<User> usersR = new ArrayList<User>();
     List<VideoTab> videoTabsR = new ArrayList<VideoTab>();
 
+    RecomendationContainer(){
+        VideoTab tab = new VideoTab();
+        tab.setStart("543");
+    }
+
     public List<VideoComment> getVideoCommentsByVideoID(Integer Id) {
         List<VideoComment> comments = new ArrayList<VideoComment>();
         for (int i = 0; i < videoCommentsR.size(); i++) {
@@ -38,7 +40,8 @@ public class RecomendationContainer {
     //接收前端的东西
     @PostMapping("savetab")
     @ResponseBody
-    public String getVideo(@RequestParam(value = "video_url") String link, @RequestParam(value = "user") String user_id) {
+    public Message2 getVideo(@RequestParam(value = "video_url") String link, @RequestParam(value = "user") String user_id) {
+        Message2 message2 = new Message2();
         String userid = user_id;
         String url = link;
         String video_link = url.split("\\*")[0];
@@ -63,7 +66,7 @@ public class RecomendationContainer {
         temptab.setVideo_url_id(video_link_id);
         temptab.setMid_id(video_mid);
         temptab.setUuid(uuid);
-        temptab.setTime(time);
+        temptab.setStart(time);
 
         videoTabsR.add(temptab);
 
@@ -71,8 +74,31 @@ public class RecomendationContainer {
         tempuser.setUser_name(" ");
 
         usersR.add(tempuser);
+        message2.setTab(uuid);
 
-        return uuid;
+        return message2;
+    }
+    //https://youtu.be/0i7Fr3srkTM?t=2768
+    @GetMapping("/getlink")
+    @ResponseBody
+    public VideoTab returnLink(@Param(value = "uuid") String uuid) {
+        Message2 message = new Message2();
+        VideoTab tab = new VideoTab();
+        if(uuid.equals(""))
+        for (int i = 0; i < videoTabsR.size(); i++) {
+            if (videoTabsR.get(i).getUuid().equals(uuid)) {
+                return videoTabsR.get(i);
+            }
+        }
+        tab.setMid_id("0i7Fr3srkTM");
+        tab.setStart("2768");
+        Comment2 comments = new Comment2();
+        Comment2[] array = new Comment2[2];
+        array[0] = comments;
+        comments.setText("good");
+        comments.setScore(5);
+        tab.setComments(array);
+        return tab;
     }
 
     //根据video主网址，显示所有这个网址的结果
@@ -90,9 +116,10 @@ public class RecomendationContainer {
     //接收comment
     @PostMapping("comment")
     @ResponseBody
-    public boolean getComment(@Param(value = "user") String user_id, @Param(value = "comment") String comment) {
+    public Message2 getComment(@Param(value = "user") String user_id, @Param(value = "comment") String comment) {
         String userid = user_id;
         String user_comment = comment;
+        Message2 message2 = new Message2();
 
         VideoComment videoComment = new VideoComment();
         videoComment.setVideo_comment_id(videoCommentsID++);
@@ -100,18 +127,9 @@ public class RecomendationContainer {
 
         videoCommentsR.add(videoComment);
 
-        return true;
+        return message2;
     }
 
-    @GetMapping("getlink")
-    @ResponseBody
-    public VideoTab returnLink(@Param(value = "uuid") String uuid) {
-        for (int i = 0; i < videoTabsR.size(); i++) {
-            if (videoTabsR.get(i).getUuid() == uuid) {
-                return videoTabsR.get(i);
-            }
-        }
-        return null;
-    }
+
 
 }

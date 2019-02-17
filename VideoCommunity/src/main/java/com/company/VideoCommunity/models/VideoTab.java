@@ -1,7 +1,5 @@
 package com.company.VideoCommunity.models;
 
-import java.util.UUID;
-
 
 public class VideoTab {
 
@@ -15,9 +13,19 @@ public class VideoTab {
 
     private String uuid;
 
-    private String time;
+    private String start;
 
     private String video_link;
+
+    private Comment2[] comments;
+
+    public Comment2[] getComments() {
+        return comments;
+    }
+
+    public void setComments(Comment2[] comment) {
+        this.comments = comment;
+    }
 
     public String getVideo_link() {
         return video_link;
@@ -59,12 +67,12 @@ public class VideoTab {
         this.mid_id = mid_id;
     }
 
-    public String getTime() {
-        return time;
+    public String getStart() {
+        return start;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setStart(String start) {
+        this.start = start;
     }
 
     public String getUuid() {
